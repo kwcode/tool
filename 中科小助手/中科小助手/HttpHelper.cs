@@ -859,7 +859,7 @@ public class HttpResult
                 {
                     string baseurl = Header["location"].ToString().Trim();
                     string locationurl = baseurl.ToLower();
-                    if (!string.IsNullOrWhiteSpace(locationurl))
+                    if (!string.IsNullOrEmpty(locationurl))
                     {
                         bool b = locationurl.StartsWith("http://") || locationurl.StartsWith("https://");
                         if (!b)

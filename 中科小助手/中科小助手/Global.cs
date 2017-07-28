@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+ 
 using System.Net;
 using System.Text;
 using System.Threading;
@@ -17,7 +17,7 @@ public class Global
     /// 缓存的Cookie
     /// </summary>
     public static string Cookie { get; set; }
-    public static CookieCollection CookieCollection = new CookieCollection();
+    public static CookieContainer CookieCollection = new CookieContainer();
     /// <summary>
     /// 安全参数
     /// </summary>

@@ -4,8 +4,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace 中科小助手
@@ -31,7 +31,29 @@ namespace 中科小助手
             string UserName = txtUserName.Text.Trim();
             string Password = txtPassword.Text.Trim();
             string Yzm = txtYzm.Text.Trim();
-            ZkCommon.Login(UserName, Password, Yzm);
+            string html = ZkCommon.Login(UserName, Password, Yzm);
+            string value = ZkCommon.GetMatchVal(html, @"<script>alert\(""(?<val>.*?)""\);</script>");
+            if (value == "")
+            {
+                string actionPage = ZkCommon.GetMatchVal(html, @"<form (.*) action=""(?<val>.*?).aspx""");
+                if (actionPage.ToLower() == "index")
+                {
+                    //登录成功 
+                    WinForm win = new WinForm();
+                    this.Hide();
+                    win.Show();
+                }
+                else
+                {
+                    MessageBox.Show("登录失败");
+                }
+            }
+            else
+            {
+                MessageBox.Show(value);
+            }
+
+
         }
     }
 }
